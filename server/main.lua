@@ -1952,8 +1952,8 @@ QBCore.Functions.CreateCallback('inventory:server:GetCurrentDrops', function(_, 
 	cb(Drops)
 end)
 
-QBCore.Functions.CreateCallback('QBCore:HasItem', function(source, cb, items, amount)
-	print("^3QBCore:HasItem is deprecated, please use QBCore.Functions.HasItem, it can be used on both server- and client-side and uses the same arguments.^0")
+QBCore.Functions.CreateCallback('QBCore.Functions.HasItem', function(source, cb, items, amount) --[[CHANGED FOR UPDATE USED TO BE QBCore:HasItem]]
+	-- print("^3QBCore:HasItem is deprecated, please use QBCore.Functions.HasItem, it can be used on both server- and client-side and uses the same arguments.^0")
     local retval = false
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then return cb(false) end
