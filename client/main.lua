@@ -686,34 +686,34 @@ RegisterCommand('inventory', function()
                 local maxweight
                 local slots
                 if vehicleClass == 0 then
-                    maxweight = 78000
+                    maxweight = 120000
                     slots = 30
                 elseif vehicleClass == 1 then
-                    maxweight = 100000
+                    maxweight = 120000
                     slots = 40
                 elseif vehicleClass == 2 then
                     maxweight = 150000
                     slots = 50
                 elseif vehicleClass == 3 then
-                    maxweight = 84000
+                    maxweight = 120000
                     slots = 35
                 elseif vehicleClass == 4 then
-                    maxweight = 78000
+                    maxweight = 120000
                     slots = 30
                 elseif vehicleClass == 5 then
-                    maxweight = 60000
+                    maxweight = 120000
                     slots = 25
                 elseif vehicleClass == 6 then
-                    maxweight = 60000
+                    maxweight = 120000
                     slots = 25
                 elseif vehicleClass == 7 then
-                    maxweight = 60000
+                    maxweight = 120000
                     slots = 25
                 elseif vehicleClass == 8 then
-                    maxweight = 30000
+                    maxweight = 50000
                     slots = 15
                 elseif vehicleClass == 9 then
-                    maxweight = 100000
+                    maxweight = 120000
                     slots = 35
                 elseif vehicleClass == 12 then
                     maxweight = 240000
@@ -731,7 +731,7 @@ RegisterCommand('inventory', function()
                     maxweight = 240000
                     slots = 50
                 else
-                    maxweight = 120000
+                    maxweight = 280000
                     slots = 35
                 end
                 local other = {
