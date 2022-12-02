@@ -20,7 +20,7 @@ Config.BinObjects = {
     "prop_bin_05a",
 }
 
-Config.CraftingObject = `prop_toolchest_05` -- Only needed if not using target | Line 928 to change Target Models
+Config.CraftingObject = `` -- Only needed if not using target | Line 928 to change Target Models
 
 Config.VendingItem = {
     [1] = {
