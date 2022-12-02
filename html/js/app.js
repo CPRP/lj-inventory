@@ -500,7 +500,16 @@ function FormatItemInfo(itemData, dom) {
             $(".item-info-description").html(
                 "<p>" + itemData.info.uses + " uses left.</p>"
             );
-        } else if (itemData.name == "mechboard") {
+        } else if (itemData.name == "craftrecipe") { //Added for jim-crafting
+            $(".item-info-title").html("<p>" + itemData.info.item + " Recipe</p>");
+            $(".item-info-description").html(
+                "<p><strong>One use only: </strong><span>" +
+                itemData.info.oneUse +
+                "</span></p><p><strong>Recipe ID: </strong><span>" +
+                itemData.info.CraftAdd +
+                "</span></p>"
+            );
+        } else if (itemData.name == "mechboard") { //Added for jim-mechanic
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
                 "<p>" + itemData.info.vehplate + "</p>" +
