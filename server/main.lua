@@ -206,6 +206,10 @@ local function RemoveItem(source, item, amount, slot)
 
 	amount = tonumber(amount) or 1
 	slot = tonumber(slot)
+	
+	if item == "phone" then
+		TriggerClientEvent('lb-phone:itemRemoved', source)
+	end
 
 	if slot then
 		if Player.PlayerData.items[slot].amount > amount then
