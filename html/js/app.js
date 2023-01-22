@@ -437,6 +437,16 @@ function FormatItemInfo(itemData, dom) {
     element.css('left', leftOffset);
 
     if (itemData != null && itemData.info != "") {
+        if (itemData.name == "phone" && itemData.info.lbPhoneNumber) {
+            $(".item-info-title").html("<p>" + (itemData.info.lbPhoneName ?? itemData.label) + "</p>");
+            $(".item-info-description").html(
+                "<p><strong>Phone Number: </strong><span>" +
+                (itemData.info.lbFormattedNumber ?? itemData.info.lbPhoneNumber) +
+                "</span></p>"
+            );
+            return;
+        }
+      
         if (itemData.name == "id_card") {
             var gender = "Man";
             if (itemData.info.gender == 1) {
