@@ -611,6 +611,15 @@ function FormatItemInfo(itemData, dom) {
             $(".item-info-description").html(
                 "<p>" + itemData.info.uses + " uses left.</p>"
             );
+        } else if (itemData.name == "flightlicense") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+			$(".item-info-description").html(
+				"<p><strong>Name: </strong><span>" + itemData.info.name +
+				"<p><strong>CitizenID: </strong><span>" + itemData.info.citizenid +
+				"</span></p><p><strong>Date: </strong><span>" +itemData.info.date +
+				"</span></p><p><strong>Type: </strong><span>" +itemData.info.test +
+				"</span></p>"
+			);
         } else if (itemData.name == "craftrecipe") { //Added for jim-crafting
             $(".item-info-title").html("<p>" + itemData.info.item + " Recipe</p>");
             $(".item-info-description").html(
