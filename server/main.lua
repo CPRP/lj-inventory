@@ -914,7 +914,7 @@ local function CreateDropId()
 	end
 end
 
-local function CreateNewDrop(source, fromSlot, toSlot, itemAmount)
+local function CreateNewDrop(source, fromSlot, toSlot, itemAmount, InRoyale)
 	itemAmount = tonumber(itemAmount) or 1
 	local Player = QBCore.Functions.GetPlayer(source)
 	local itemData = GetItemBySlot(source, fromSlot)
@@ -948,7 +948,12 @@ local function CreateNewDrop(source, fromSlot, toSlot, itemAmount)
 		}
 		TriggerEvent("qb-log:server:CreateLog", "drop", "New Item Drop", "red", "**".. GetPlayerName(source) .. "** (citizenid: *"..Player.PlayerData.citizenid.."* | id: *"..source.."*) dropped new item; name: **"..itemData.name.."**, amount: **" .. itemAmount .. "**")
 		TriggerClientEvent("inventory:client:DropItemAnim", source)
-		TriggerClientEvent("inventory:client:AddDropItem", -1, dropId, source, coords)
+		-- TriggerClientEvent("inventory:client:AddDropItem", -1, dropId, source, coords)
+		if InRoyale then -- ADDED FOR PUG BATTLEROYAL SCRIPT (NEXT 6 LINES)
+			TriggerClientEvent("Pug:client:OpenDroppedStash2", source, dropId)
+		else
+			TriggerClientEvent("inventory:client:AddDropItem", -1, dropId, source, coords)
+		end
 		if itemData.name:lower() == "radio" then
 			TriggerClientEvent('Radio.Set', source, false)
 		end
@@ -1029,10 +1034,35 @@ RegisterNetEvent('QBCore:Server:UpdateObject', function()
     QBCore = exports['qb-core']:GetCoreObject()
 end)
 
-RegisterNetEvent('inventory:server:addTrunkItems', function(plate, items)
+---------------------------------
+
+function addTrunkItems(plate, items)
 	Trunks[plate] = {}
 	Trunks[plate].items = items
+end
+
+exports('addTrunkItems', addTrunkItems)
+
+function addGloveboxItems(plate, items)
+	Gloveboxes[plate] = {}
+	Gloveboxes[plate].items = items
+end
+exports('addGloveboxItems',addGloveboxItems)
+
+RegisterNetEvent('inventory:server:addTrunkItems', function(plate, items)
+	addTrunkItems(plate, items)
 end)
+
+RegisterNetEvent('inventory:server:addGloveboxItems', function(plate, items)
+	addGloveboxItems(plate, items)
+end)
+
+---------------------------------
+
+-- RegisterNetEvent('inventory:server:addTrunkItems', function(plate, items)
+-- 	Trunks[plate] = {}
+-- 	Trunks[plate].items = items
+-- end)
 
 RegisterNetEvent('inventory:server:combineItem', function(item, fromItem, toItem)
 	local src = source
@@ -1376,7 +1406,7 @@ RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
 	end
 end)
 
-RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount)
+RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount, InRoyale)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
 	fromSlot = tonumber(fromSlot)
@@ -1519,7 +1549,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 				-- drop
 				toInventory = tonumber(toInventory)
 				if toInventory == nil or toInventory == 0 then
-					CreateNewDrop(src, fromSlot, toSlot, fromAmount)
+					CreateNewDrop(src, fromSlot, toSlot, fromAmount, InRoyale)
 				else
 					local toItemData = Drops[toInventory].items[toSlot]
 					RemoveItem(src, fromItemData.name, fromAmount, fromSlot)
